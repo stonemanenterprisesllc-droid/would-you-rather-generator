@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Would You Rather Generator — Random Funny, Hard & Clean Questions</title>
 <meta name="description" content="Generate random Would You Rather questions instantly: funny, hard, gross, deep, and kid-friendly options for parties, road trips, and groups. Free and unlimited.">
+<meta name="theme-color" content="#0e7490">
 <link rel="canonical" href="https://wouldyourather.clickabletools.com/">
 <style>
 :root{--accent:#0891b2;--accent-dark:#0e7490}
@@ -35,6 +36,107 @@ article p,article li{margin:.5rem 0}
 article ul{padding-left:1.4rem}
 footer{max-width:760px;margin:2rem auto;padding:1rem;font-size:.85rem;color:#6b7280;border-top:1px solid #e5e7eb}
 footer a{color:#6b7280;margin-right:1rem}
+/* ===THEME-LAYER-BEGIN=== */
+/* ═══ Theme layer (added 2026-08-02) ══════════════════════════════════════════
+   APPENDED, never replacing what is above it. Every site has its own layout CSS
+   for its own tool — puzzle grids, handwriting rows, decay charts, time cards —
+   and that must survive untouched. These rules come later in the cascade, so
+   they restyle only the SHARED chrome: page, header, headline, the tool card,
+   buttons, fields and results.
+
+   The tool card stays LIGHT on purpose. Site-specific children below assume a
+   light background and set their own dark text; flipping the container dark
+   would leave dark-on-dark, which is unreadable.                             */
+:root{
+  --accent:#0891b2;--accent-dark:#0e7490;--pop:#22d3ee;--pop2:#a855f7;
+  --ink2:#241f2b;--dim2:#6b6478;--line2:rgba(40,30,60,.13);
+  --mono2:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+body{background:#edf9fc;color:var(--ink2);-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;position:relative}
+/* Three coloured lights drifting behind the page. */
+body::before{content:"";position:fixed;inset:-20%;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(42% 36% at 10% 4%,rgba(8,145,178,.20),transparent 66%),
+    radial-gradient(40% 34% at 92% 2%,rgba(34,211,238,.22),transparent 66%),
+    radial-gradient(48% 40% at 70% 98%,rgba(168,85,247,.18),transparent 64%);
+  filter:blur(26px);animation:bgdrift 26s ease-in-out infinite alternate}
+@keyframes bgdrift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  100%{transform:translate3d(-2%,2%,0) scale(1.07)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;
+    animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+
+header{background:linear-gradient(120deg,var(--accent-dark),var(--accent) 55%,var(--pop));
+  box-shadow:0 8px 30px rgba(8,145,178,.34);position:relative;z-index:1}
+header a{font-weight:800;letter-spacing:-.2px;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+main{max-width:820px}
+h1{font-size:1.75rem;letter-spacing:-.6px;font-weight:800;margin:1rem 0 .3rem;
+  background:linear-gradient(96deg,var(--accent-dark),var(--accent) 45%,var(--pop));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.tagline{color:var(--dim2);font-size:1.02rem;margin-bottom:1.1rem}
+
+/* The tool card — lit from the top edge, lifted off the page. */
+.tool{position:relative;background:rgba(255,255,255,.86);
+  backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);
+  border:1px solid rgba(255,255,255,.7);border-radius:20px;padding:1.3rem;
+  box-shadow:0 20px 50px rgba(8,145,178,.20),0 2px 0 rgba(255,255,255,.9) inset;
+  overflow:hidden;animation:cardin .5s cubic-bezier(.2,.85,.25,1) both}
+.tool::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;
+  background:linear-gradient(90deg,var(--accent),var(--pop),var(--pop2),var(--accent));
+  background-size:300% 100%;animation:sheen 9s linear infinite}
+@keyframes sheen{to{background-position:300% 0}}
+@keyframes cardin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+label,.opts label{font:800 9.5px/1.35 var(--mono2);letter-spacing:1.4px;
+  text-transform:uppercase;color:var(--dim2)}
+input,select,textarea{border:1px solid var(--line2);border-radius:11px;padding:.62rem .7rem;
+  font-family:inherit;background:#fff;color:var(--ink2);
+  transition:border-color .18s,box-shadow .18s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(8,145,178,.18)}
+
+/* Buttons: gradient, lift, glow, and a sheen that sweeps across on hover. */
+.btn,.actionbtn{position:relative;overflow:hidden;border:none;border-radius:11px;
+  background:linear-gradient(140deg,var(--accent),var(--pop));color:#fff;
+  font-weight:800;cursor:pointer;
+  box-shadow:0 8px 24px rgba(8,145,178,.42),inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .12s cubic-bezier(.3,1.5,.5,1),box-shadow .2s,filter .18s}
+.btn::after,.actionbtn::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.45),transparent);
+  transition:left .55s ease}
+.btn:hover,.actionbtn:hover{transform:translateY(-2px);background:linear-gradient(140deg,var(--accent),var(--pop));
+  box-shadow:0 14px 34px rgba(8,145,178,.58),inset 0 1px 0 rgba(255,255,255,.35)}
+.btn:hover::after,.actionbtn:hover::after{left:130%}
+.btn:active,.actionbtn:active{transform:translateY(0) scale(.97)}
+.btn.alt,.btn.noprint{background:#fff;color:var(--accent);border:1px solid rgba(8,145,178,.35);
+  box-shadow:0 4px 14px rgba(8,145,178,.14)}
+.btn.alt:hover,.btn.noprint:hover{background:rgba(8,145,178,.06);
+  box-shadow:0 10px 26px rgba(8,145,178,.22)}
+
+/* Results */
+.name-card,.item,.time-card,.preview{border-radius:12px;
+  transition:transform .18s,box-shadow .18s,border-left-color .18s;
+  animation:cardin .45s cubic-bezier(.2,.9,.3,1) both}
+.name-card{border-left:4px solid var(--accent);
+  box-shadow:0 4px 14px rgba(8,145,178,.10)}
+.name-card:hover,.item:hover,.time-card:hover{transform:translateX(4px);
+  box-shadow:0 10px 26px rgba(8,145,178,.18)}
+.name-card:hover{border-left-color:var(--pop)}
+.copybtn{border-radius:8px;font-weight:700;transition:.16s;cursor:pointer}
+.copybtn:hover{border-color:var(--accent);color:var(--accent)}
+.chip{transition:transform .15s,box-shadow .15s}
+.chip:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(8,145,178,.22)}
+.chip.on{background:linear-gradient(140deg,var(--accent),var(--pop));color:#fff;
+  box-shadow:0 6px 18px rgba(8,145,178,.4)}
+.q,.lead{color:var(--ink2)}
+
+footer{max-width:820px}
+footer a:hover{color:var(--accent)}
+/* ===THEME-LAYER-END=== */
 </style>
 </head>
 <body>
